@@ -17,6 +17,8 @@ function sleep(ms) {
 In progress!
 
 ### LanguagesOnline
+
+#### Multiple Choice
 ```
 var correct = "Muy bien";
 for(var i=0;i<I.length;i++){
@@ -30,6 +32,23 @@ for(var i=0;i<I.length;i++){
     }
     await sleep(500);
     ChangeQ(1);
+}
+```
+
+#### Drag and Drop
+```
+for(var i=0;i<DragEx.RightItems.length;i++){
+    var left_card = DragEx.GetLeftItemByOrigPos(DragEx.RightItems[i].OrigPos);
+    var right_card = DragEx.GetRightItemByOrigPos(DragEx.RightItems[i].OrigPos);
+    var right_card_data = document.getElementById("R_"+DragEx.RightItems[i].OrigPos).innerHTML;
+    console.log(right_card_data);
+    console.log(left_card);
+    console.log(right_card);
+    DraggingCard = right_card;
+    var point = DragEx.GetDockPoint(left_card.OrigPos, right_card.Card);
+    Slide(right_card.OrigPos, point);
+    DragEx.HandleDrop(right_card.OrigPos);
+    right_card.MatchedWith = left_card.OrigPos;
 }
 ```
 
