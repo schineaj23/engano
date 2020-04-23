@@ -12,6 +12,15 @@ function sleep(ms) {
 }
 ```
 
+### ThisIsLanguage
+This script will automatically detect the challenge then solve. 
+The script only works when the questions are visible.
+```
+fetch('https://gist.githubusercontent.com/schineaj23/e13040745e0aad793f159cb2e17eeb12/raw/aa80e966b1a7a146b574ceefae402e21edcba983/language.js')
+    .then(response => response.text())
+    .then(text => eval(text))
+    .then(() => { /* Engano injected! */ })
+```
 
 ### SpanishDict
 In progress!
