@@ -21,11 +21,11 @@ class Engano {
     }
 
     // vocab
-    vocab() {
+    vocab(list) {
         var cards = document.getElementsByClassName("card_container")[0].children;
         for(var i=0;i<card.words.length;i++) {
             var _card = document.getElementsByClassName("translation");
-            _card[i].children[0].value = card.words[i].prim_word;
+            (list) ? _card[i].children[0].value = card.words[i].foreign.split(',')[0]: _card[i].children[0].value = card.words[i].prim_word;
             card.check();
             screens.tester.next_card();
         }   
@@ -119,7 +119,7 @@ class Engano {
     constructor() {
         var cool = "\n _______  __    _  _______  _______  __    _  _______ \n|       ||  |  | ||       ||   _   ||  |  | ||       |\n|    ___||   |_| ||    ___||  |_|  ||   |_| ||   _   |\n|   |___ |       ||   | __ |       ||       ||  | |  |\n|    ___||  _    ||   ||  ||       ||  _    ||  |_|  |\n|   |___ | | |   ||   |_| ||   _   || | |   ||       |\n|_______||_|  |__||_______||__| |__||_|  |__||_______|";
         console.error(cool);
-        var types = ["jigsaw", "video_vocab", "gap_fill", "comprehension", "grammar main", "grammar_training"];
+        var types = ["jigsaw", "video_vocab", "gap_fill", "comprehension", "grammar main", "grammar_training", "list_vocab", "grammar"];
         var type = window.location.pathname;
         type = type.split('t/')[1];
         type = type.split('/')[0];
@@ -136,8 +136,8 @@ class Engano {
                 this.jigsaw();
                 break;
             case types[1]: // video vocab
-                console.info("Engano: Vocab Found")
-                this.vocab();
+                console.info("Engano: Video Vocab Found")
+                this.vocab(false);
                 break;
             case types[2]: // gap fill
                 console.info("Engano: Gap Fill Found");
@@ -147,6 +147,7 @@ class Engano {
                 console.info("Engano: Comprehension Found");
                 this.comp();
                 break;
+            case types[7]:
             case types[4]:
                 console.info("Engano: Grammar Test Found");
                 this.grammar();
@@ -154,6 +155,10 @@ class Engano {
             case types[5]:
                 console.info("Engano: Grammar Training Found");
                 this.grammar();
+                break;
+            case types[6]:
+                console.info("Engano: List Vocab Found");
+                this.vocab(true);
                 break;
             default: // none found
                 console.error("Engano: Input does not match type");
