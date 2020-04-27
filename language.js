@@ -45,7 +45,7 @@ class Engano {
 
     // comprehension
     comp() {
-        var rows = document.getElementsByClassName("questions_table")[0].children
+        var rows = document.getElementsByClassName("questions_table")[0].children;
         for(var i=0;i<rows.length;i++) {
             var questions = rows[i].children;
             for(var j=0;j<questions.length;j++) {
@@ -70,6 +70,13 @@ class Engano {
         var type = window.location.pathname;
         type = type.split('t/')[1];
         type = type.split('/')[0];
+        if(type == "task") { // assigned exercise, type not in url
+            var t_type = document.getElementsByClassName("screen_container")[0].children[0].className;
+            if(t_type == types[2]) { // extra check for gap fill
+                (document.getElementsByClassName("options ui-droppable").length == 1) ? t_type = types[0] : t_type = types[2];
+            }
+            type = t_type;
+        }
         switch(type) {
             case types[0]: // jigsaw
                 console.info("Engano: Jigsaw Found");
