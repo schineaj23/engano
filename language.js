@@ -63,10 +63,63 @@ class Engano {
         }
     }
 
+    grammar() {
+        var answer = function(name) { // general answer function
+            var options = document.getElementsByClassName(name)[0].children;
+            var correct = function() { // general correct function
+                for(var j=0;j<options.length;j++) {
+                    if(options[j].getAttribute("data-correct") == "true") {
+                        return options[j];
+                    }
+                }
+            };
+            correct().click();
+            document.getElementsByClassName("next_btn")[0].click();
+            document.getElementsByClassName("next_btn")[0].click();
+        };
+
+        var identification = function() {
+            answer("f-size");
+        };
+
+        var multiple_choice = function() {
+            answer("fake_options");
+        };
+
+        var spelling = function() {
+            var answers = screens.grammar_spelling.correct_answers;
+            var spelling_input = document.getElementsByClassName("sentence f-size")[0].children[0];
+            spelling_input.value = answers[0];
+            document.getElementsByClassName("next_btn")[0].click();
+            document.getElementsByClassName("next_btn")[0].click();
+        };
+
+        for(var j=0;j<progress.max_progress;j++) {
+            var stage = progress.cur_stage;
+            switch(stage) {
+                case "identification":
+                    console.info("Engano: Grammar Q " + j + " ID");
+                    identification();
+                    break;
+                case "multiple_choice":
+                    console.info("Engano: Grammar Q " + j + " MC");
+                    multiple_choice();
+                    break;
+                case "spelling":
+                    console.info("Engano: Grammar Q " + j + " Spelling");
+                    spelling();
+                    break;
+                default:
+                    console.warn("Engano: Grammar Q " + j + " Invalid");
+                    break;
+            }
+        }
+    }
+
     constructor() {
         var cool = "\n _______  __    _  _______  _______  __    _  _______ \n|       ||  |  | ||       ||   _   ||  |  | ||       |\n|    ___||   |_| ||    ___||  |_|  ||   |_| ||   _   |\n|   |___ |       ||   | __ |       ||       ||  | |  |\n|    ___||  _    ||   ||  ||       ||  _    ||  |_|  |\n|   |___ | | |   ||   |_| ||   _   || | |   ||       |\n|_______||_|  |__||_______||__| |__||_|  |__||_______|";
         console.error(cool);
-        var types = ["jigsaw", "video_vocab", "gap_fill", "comprehension"];
+        var types = ["jigsaw", "video_vocab", "gap_fill", "comprehension", "grammar main", "grammar_training"];
         var type = window.location.pathname;
         type = type.split('t/')[1];
         type = type.split('/')[0];
@@ -93,6 +146,14 @@ class Engano {
             case types[3]: // comprehension
                 console.info("Engano: Comprehension Found");
                 this.comp();
+                break;
+            case types[4]:
+                console.info("Engano: Grammar Test Found");
+                this.grammar();
+                break;
+            case types[5]:
+                console.info("Engano: Grammar Training Found");
+                this.grammar();
                 break;
             default: // none found
                 console.error("Engano: Input does not match type");
