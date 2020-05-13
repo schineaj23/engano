@@ -1,4 +1,14 @@
 class Engano {
+    // psuedo-exception for debugging
+    check_progress(iterator) {
+        if(iterator+1 > progress.cur_progress) {
+            console.error("Engano: Failed to advance on question " + iterator + " Did code fail?");
+            console.error("Engano: [DEBUG INFO]\nQ:\t"+iterator+"\nS:\t"+progress.cur_stage+"\nP:\t"+progress.cur_progress);
+            return false;
+        }
+        return true;
+    }
+
     // jigsaw
     jigsaw() {
         var transcript = document.getElementsByClassName("transcript")[0].children;
@@ -22,13 +32,15 @@ class Engano {
 
     // vocab
     vocab(list) {
-        var cards = document.getElementsByClassName("card_container")[0].children;
         for(var i=0;i<card.words.length;i++) {
             var _card = document.getElementsByClassName("translation");
             (list) ? _card[i].children[0].value = card.words[i].foreign.split(',')[0]: _card[i].children[0].value = card.words[i].prim_word;
             card.check();
             screens.tester.next_card();
-        }   
+            if(!this.check_progress(i)) {
+                break;
+            }
+        }
     }
 
     // gap fill
@@ -88,8 +100,11 @@ class Engano {
 
         var spelling = function() {
             var answers = screens.grammar_spelling.correct_answers;
-            var spelling_input = document.getElementsByClassName("sentence f-size")[0].children[0];
-            spelling_input.value = answers[0];
+            var len = document.getElementsByClassName("sentence f-size")[0].children.length;
+            for(var i=0;i<len;i++) {
+                var spelling_input = document.getElementsByClassName("sentence f-size")[0].children[i];
+                spelling_input.value = answers[i];
+            }
             document.getElementsByClassName("next_btn")[0].click();
             document.getElementsByClassName("next_btn")[0].click();
         };
@@ -112,6 +127,9 @@ class Engano {
                 default:
                     console.warn("Engano: Grammar Q " + j + " Invalid");
                     break;
+            }
+            if(!this.check_progress(j)) {
+                break;
             }
         }
     }
