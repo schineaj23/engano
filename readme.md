@@ -14,7 +14,7 @@ function sleep(ms) {
 
 ### ThisIsLanguage
 This script will automatically detect the challenge then solve. 
-The script only works when the questions are visible.
+Execute the script when the questions are visible.
 ```
 fetch('https://raw.githubusercontent.com/schineaj23/engano/master/language.js')
     .then(response => response.text())
