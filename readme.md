@@ -5,16 +5,18 @@
 With the situation going on in the world, many people must do "distance learning." However, many students forget lessons from class but still need exceptional grades. Fear not! For I have made many scripts that the student can paste into their console with no knowledge required!
 
 ## Usage
-Most scripts use a `sleep` command to show your immense skills, but this isn't needed. Paste this in before the main script for best effect.
+Copy and paste these into your console in developer tools! The scripts are working, tested and made for Chrome. Your mileage may vary on other browsers.
+Some Simple Scripts use a `sleep` command to show off skillz, you don't need this for the all-inclusive scripts.
 ```
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 ```
 
+## All-Inclusive Scripts
+These scripts are designed to detect the type of exercise, then solve. With both scripts, the questions must be visible for best effect (i.e this is not an auto-bot)
+
 ### ThisIsLanguage
-This script will automatically detect the challenge then solve. 
-Execute the script when the questions are visible.
 ```
 fetch('https://raw.githubusercontent.com/schineaj23/engano/master/language.js')
     .then(response => response.text())
@@ -22,44 +24,17 @@ fetch('https://raw.githubusercontent.com/schineaj23/engano/master/language.js')
     .then(() => { /* Engano injected! */ })
 ```
 
+### LanguagesOnline
+```
+fetch('https://raw.githubusercontent.com/schineaj23/engano/master/online.js')
+    .then(response => response.text())
+    .then(text => eval(text))
+    .then(() => { /* Engano injected! */ })
+```
+
+## Simple Scripts
 ### SpanishDict
 In progress!
-
-### LanguagesOnline
-
-#### Multiple Choice
-```
-var correct = "Muy bien";
-for(var i=0;i<I.length;i++){
-    for(var j=0;j<3;j++) {
-        var Feedback = I[i][3][j][1];
-        if(Feedback == correct){
-            var id = 'Q_' + i + '_'+ j + '_Btn';
-            console.log(i + ' ' + id + ' ' + Feedback);
-            document.getElementById(id).click();
-        }
-    }
-    await sleep(500);
-    ChangeQ(1);
-}
-```
-
-#### Drag and Drop
-```
-for(var i=0;i<DragEx.RightItems.length;i++){
-    var left_card = DragEx.GetLeftItemByOrigPos(DragEx.RightItems[i].OrigPos);
-    var right_card = DragEx.GetRightItemByOrigPos(DragEx.RightItems[i].OrigPos);
-    var right_card_data = document.getElementById("R_"+DragEx.RightItems[i].OrigPos).innerHTML;
-    console.log(right_card_data);
-    console.log(left_card);
-    console.log(right_card);
-    DraggingCard = right_card;
-    var point = DragEx.GetDockPoint(left_card.OrigPos, right_card.Card);
-    Slide(right_card.OrigPos, point);
-    DragEx.HandleDrop(right_card.OrigPos);
-    right_card.MatchedWith = left_card.OrigPos;
-}
-```
 
 ### LearnSpanishFeelGood
 ```
