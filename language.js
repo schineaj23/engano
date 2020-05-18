@@ -109,6 +109,25 @@ class Engano {
             document.getElementsByClassName("next_btn")[0].click();
         };
 
+        var ordering = function() {
+            var initial_length = document.getElementsByClassName("words-origin words-area words-sortable f-size ui-sortable")[0].children.length;
+            var words = document.getElementsByClassName("words-origin words-area words-sortable f-size ui-sortable")[0].children;
+            var correct_container = document.getElementsByClassName("words-destination words-area words-sortable  f-size ui-sortable")[0];
+            for(var i=0;i<initial_length;i++) {
+                var node = function() {
+                    for(var j=0;j<words.length;j++) {
+                        var ret = words[j];
+                        if(ret.getAttribute("data-index") == i) {
+                            return ret;
+                        }
+                    }
+                };
+                correct_container.append(node());
+            }
+            document.getElementsByClassName("next_btn")[0].click();
+            document.getElementsByClassName("next_btn")[0].click();
+        };
+
         for(var j=0;j<progress.max_progress;j++) {
             var stage = progress.cur_stage;
             switch(stage) {
@@ -123,6 +142,10 @@ class Engano {
                 case "spelling":
                     console.info("Engano: Grammar Q " + j + " Spelling");
                     spelling();
+                    break;
+                case "ordering":
+                    console.info("Engano: Grammar Q " + j + " Ordering");
+                    ordering();
                     break;
                 default:
                     console.warn("Engano: Grammar Q " + j + " Invalid");
