@@ -77,15 +77,19 @@ class Engano {
 
     grammar() {
         var answer = function(name) { // general answer function
-            var options = document.getElementsByClassName(name)[0].children;
-            var correct = function() { // general correct function
+            var elements = document.getElementsByClassName(name);
+            for(var k=0;k<elements.length;k++) {
+                var options = elements[k].children;
+                var correct_answers = new Array();
                 for(var j=0;j<options.length;j++) {
                     if(options[j].getAttribute("data-correct") == "true") {
-                        return options[j];
+                        correct_answers.push(options[j]);
                     }
                 }
-            };
-            correct().click();
+                for(var i=0;i<correct_answers.length;i++) {
+                    correct_answers[i].click();
+                }
+            }
             document.getElementsByClassName("next_btn")[0].click();
             document.getElementsByClassName("next_btn")[0].click();
         };
@@ -101,9 +105,15 @@ class Engano {
         var spelling = function() {
             var answers = screens.grammar_spelling.correct_answers;
             var len = document.getElementsByClassName("sentence f-size")[0].children.length;
+            var input_count = -1;
             for(var i=0;i<len;i++) {
                 var spelling_input = document.getElementsByClassName("sentence f-size")[0].children[i];
-                spelling_input.value = answers[i];
+                if(spelling_input.nodeName == "INPUT") {
+                    input_count++;
+                } else {
+                    continue;
+                }
+                spelling_input.value = answers[input_count];
             }
             document.getElementsByClassName("next_btn")[0].click();
             document.getElementsByClassName("next_btn")[0].click();
